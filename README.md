@@ -13,6 +13,34 @@ It exists because Wayland deliberately blocks the global input and screen-scrapi
 - **Background-first escalation.** Try accessibility, then coordinates, then foreground delivery, and use `ydotool` only as the final host-specific rung.
 - **Diagnostics.** One command reports session type, accessibility health, extension readiness, and input permissions.
 
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                        CODING AGENT                             │
+└───────────────┬─────────────────────────────────▲───────────────┘
+                │ Actions                         │ State Readback
+                ▼                                 │
+     ┌──────────────────────┐                     │
+     │     GWCU SKILL       │─────────────────────┤
+     │  lib/checks.sh       │                     │
+     └──────────┬───────────┘                     │
+                │                                 │
+         ┌──────┴───────────────┐                 │
+         │                      │                 │
+         ▼                      ▼                 ▼
+ ┌───────────────┐     ┌────────────────┐  ┌───────────────┐
+ │ GNOME SHELL   │     │ AT-SPI BUS     │  │  XDG PORTALS  │
+ │ EXTENSION     │     │ Registry       │  │  Screenshot   │
+ │ (D-Bus Stage) │     │ (Accessibility)│  │  ScreenCast   │
+ └───────┬───────┘     └────────┬───────┘  └───────┬───────┘
+         │                      │                  │
+         └──────────────┬───────┴──────────────────┘
+                        ▼
+         ┌──────────────────────────────┐
+         │     WAYLAND COMPOSITOR       │
+         │   Mutter / GNOME Shell 50    │
+         └──────────────────────────────┘
+```
+
 ## Requirements
 
 - Ubuntu or another distribution running **GNOME Shell 45–50 on Wayland**
