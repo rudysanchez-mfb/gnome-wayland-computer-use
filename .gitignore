@@ -1,0 +1,14 @@
+# Capture artifacts and caches
+*.png
+*.tmp
+.capture.*
+.capture-marker.*
+
+# Editor / OS noise
+.DS_Store
+*~
+*.swp
+
+# Local runtime state
+__pycache__/
+*.pyc
